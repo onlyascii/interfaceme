@@ -6,8 +6,8 @@ Working in big organisations I found myself waiting other teams to respond on re
 
 ## Todo / Features
 
-[ ] Simple API for requests
-[ ] Service discovery
-[ ] High availability (Just to avoid my automation to fail)
-[ ] Remote log but keep being stateless
-[ ] Tests tests tests
+- [ ] Simple API for requests
+- [ ] Service discovery
+- [ ] High availability (Just to avoid my automation to fail)
+- [ ] Remote log but keep being stateless
+- [ ] Tests tests tests
