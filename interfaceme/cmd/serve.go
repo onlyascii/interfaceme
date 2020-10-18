@@ -18,7 +18,9 @@ package cmd
 import (
 	"log"
 	"net/http"
+	"os"
 
+	"github.com/gorilla/handlers"
 	"github.com/gorilla/mux"
 
 	"github.com/spf13/cobra"
@@ -45,10 +47,17 @@ func home(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+func serve() {
+	r := mux.NewRouter()
+	r.HandleFunc("/", home)
+	loggedRouter := handlers.LoggingHandler(os.Stdout, r)
+	log.Fatal(http.ListenAndServe(":8080", loggedRouter))
+}
+
 // serveCmd represents the serve command
 var serveCmd = &cobra.Command{
 	Use:   "serve",
-	Short: "Run as a service",
+	Short: "Run as a service (which is why it was build in the first place)",
 	// 	Long: `A longer description that spans multiple lines and likely contains examples
 	// and usage of using your command. For example:
 
@@ -56,9 +65,7 @@ var serveCmd = &cobra.Command{
 	// This application is a tool to generate the needed files
 	// to quickly create a Cobra application.`,
 	Run: func(cmd *cobra.Command, args []string) {
-		r := mux.NewRouter()
-		r.HandleFunc("/", home)
-		log.Fatal(http.ListenAndServe(":8080", r))
+		serve()
 	},
 }
 
